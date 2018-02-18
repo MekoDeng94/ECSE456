@@ -62,11 +62,18 @@ all_articles = newsapi.get_everything(q='amd',
                                       sort_by='relevancy')
 
 
-data = all_articles
+# dictionary  = json.loads(all_articles)
+# urls = dicti
+print(type(all_articles))
+articles = all_articles.get("articles",None)
+for article in articles:
+	print (article.get("url"))
 
-with open ("data.json","w") as outfile:
-	json.dump(data,outfile)
+# data = all_articles
 
-with open ('data.json') as data_file:
-	retrieved = json.load(data_file)
-pprint(retrieved)
+# with open ("data.json","w") as outfile:
+# 	json.dump(data,outfile)
+
+# with open ('data.json') as data_file:
+# 	retrieved = json.load(data_file)
+# pprint(retrieved)
