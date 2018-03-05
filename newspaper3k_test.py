@@ -1,6 +1,6 @@
 from newspaper import Article
 
-link = 'www.valuewalk.com/2018/02/advanced-micro-devices-inc-stock-still-sliding-earnings-beat/'
+link = 'https://finance.yahoo.com/news/advanced-micro-devices-inc-stock-114054827.html'
 article = Article(link)
 article.download()
 article.parse()
