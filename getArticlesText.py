@@ -1,5 +1,6 @@
 from newspaper import Article
 from textblob import TextBlob
+import json
 
 url = 'http://www.valuewalk.com/2018/02/advanced-micro-devices-inc-stock-still-sliding-earnings-beat/'
 
@@ -16,3 +17,4 @@ blob = TextBlob(text)
 print(text)
 
 print (blob.sentiment)
+

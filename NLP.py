@@ -43,7 +43,7 @@ blob.noun_phrases   # WordList(['titular threat', 'blob',
 #The polarity score is a float within the range [-1.0, 1.0]. 
 #The subjectivity is a float within the range [0.0, 1.0] where 0.0 is very objective and 1.0 is very subjective.
 #not sure if this is the best way, but should test it out
-print (blob.sentiment)
+# print (blob.sentiment)
 # for sentence in blob.sentences:
 #     print(sentence.sentiment)
 
