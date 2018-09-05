@@ -9,9 +9,9 @@ data['articles'] = []
 newsapi = NewsApiClient(api_key='044f2ebd104142f4a48c5414e6f86b27')
 
 #newsapi doesn't seem to be capable of handling large amounts of data.. the furthest data I could get was back to 2017..
-all_articles = newsapi.get_everything(q='AMD stock',
-                                      from_parameter='2018-02-14',
-                                      to='2018-02-15',
+all_articles = newsapi.get_everything(q='AMD',
+                                      from_param='2018-02-14',
+                                      to='2018-03-15',
                                       language='en',
                                       sort_by='relevancy',
                                       )
@@ -29,8 +29,8 @@ class anArticle:
         self.author = author
         self.date = date
 
-    def addInformations(self,i):
-        self.append(i) 
+    # def addInformations(self,i):
+    #     self.append(i) 
 
     def __repr__(self):
         return "<__main__.anArticle: url = " + str(self.url) + "; author = " + str(self.author) + "; date = " + str(self.date) + ">"           
@@ -62,5 +62,3 @@ for article in articles:
 
 # with open('data.txt', 'w') as outfile:
 #     json.dump(data, outfile)
-
-    

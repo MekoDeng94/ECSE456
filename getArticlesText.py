@@ -18,3 +18,7 @@ print(text)
 
 print (blob.sentiment)
 
+
+'''
+https://docs.google.com/document/d/1fH8CDJoRfcPg1u39KMwq1bN02ZPKKVLMnww2SDz-TeI/edit
+'''

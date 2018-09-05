@@ -11,7 +11,6 @@ from api_newspaper_test import articleList
 #downloaded from https://www.nasdaq.com/symbol/amd/historical]
 newsAPIdates = []
 datesAndValues = [] 
-hello = 'hello'
 
 #stores targeted dates along with the corresponding high and low (using newsAPI and AMD_data.csv)
 class Information:
