@@ -23,7 +23,7 @@ class anArticle:
         return "<__main__.anArticle: url = " + str(self.url) + "; author = " + str(self.author) + "; date = " + str(self.date) + ">"           
 
 def get_updated_articles(from_date, to_date):
-    #newsapi doesn't seem to be capable of handling large amounts of data.. the furthest data I could get was back to 2017..
+    #IMPORTANT: Limit to NewsAPI is fetching 20 articles @ a time..
     logger.info('Getting articles from ' + from_date + ' to ' + to_date)
     all_articles = newsapi.get_everything(q = 'AMD stock',
                                         from_param = from_date,
