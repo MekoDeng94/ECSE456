@@ -35,15 +35,16 @@ def dateManipulation( someArticle ):
 
     newsAPIdates.append(matchingDate)
 
-for singleArticle in articleList:
-    dateManipulation(singleArticle)
-
 #fetching the right AMD_data value for the newsAPI target date
 def newsAPIandCSVcompare (csv):
     for newsAPIdate in newsAPIdates:
         if csv[0] == newsAPIdate:
             registeredInfo = Information(csv[0],csv[4],csv[5])
             datesAndValues.append(registeredInfo)      
+
+def link_stock_value_to_article_date(article_list):
+    for singleArticle in article_list:
+        dateManipulation(singleArticle)    
 
 #reading AMD_data file
 with open(r'AMD_data.csv')as f:
