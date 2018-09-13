@@ -1,7 +1,8 @@
+import json
 from newsapi import NewsApiClient
 from newspaper import Article
 from runner.console_monochrome import Console
-import json
+from textblob import TextBlob
 
 logger = Console()
 
@@ -14,13 +15,15 @@ articleList = []
 class anArticle:
     articleCount = 0
 
-    def __init__(self,url,author,date):
+    def __init__(self,url,author,date, polarity, subjectivity):
         self.url = url
         self.author = author
         self.date = date
+        self.polarity = polarity
+        self.subjectivity = subjectivity
 
     def __repr__(self):
-        return "<__main__.anArticle: url = " + str(self.url) + "; author = " + str(self.author) + "; date = " + str(self.date) + ">"           
+        return "<__main__.anArticle: url = " + str(self.url) + "; author = " + str(self.author) + "; date = " + str(self.date) + "; polarity = " + str(self.polarity) + "; subjectivity = " + str(self.subjectivity) + ">"           
 
 def get_updated_articles(from_date, to_date):
     #IMPORTANT: Limit to NewsAPI is fetching 20 articles @ a time..
@@ -54,23 +57,36 @@ def get_updated_articles(from_date, to_date):
     logger.info ('Total number of articles fetched: ' + str(all_articles_num))
     return all_articles_returned
 
+def get_sentiment_polarity(text):
+    blob = TextBlob(text)
+    return blob.sentiment.polarity
+
+def get_sentiment_subjectivity(text):
+    blob = TextBlob(text)
+    return blob.sentiment.subjectivity
+
+        
 def create_articleList(from_date, to_date):
     articles = get_updated_articles(from_date, to_date)
     articleList = []
 
+    count = 0
     for article in articles:
-        logger.info('Extracting article information')
+        count += 1
         link = article.get("url")
         auth = article.get("author")
         time = article.get("publishedAt")
         sources = article.get("source")
         domain_name = sources.get("name")
+        logger.info('Extracting article information... ' + str(count))
         article = Article(link)
         try:
             article.download()
             article.parse()
             text = article.text
-            domain_name = anArticle(link, auth, time)
+            sentiment_polarity = get_sentiment_polarity(text)
+            sentiment_subjectivity = get_sentiment_subjectivity(text)
+            domain_name = anArticle(link, auth, time, sentiment_polarity, sentiment_subjectivity)
             articleList.append(domain_name)
         except Exception as e:
             pass

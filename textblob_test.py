@@ -13,17 +13,17 @@ I love Jeremy.
 
 blob = TextBlob(text)
 
-blob.tags           # [('The', 'DT'), ('titular', 'JJ'),
+# blob.tags           # [('The', 'DT'), ('titular', 'JJ'),
 
-                    #  ('threat', 'NN'), ('of', 'IN'), ...]
+#                     #  ('threat', 'NN'), ('of', 'IN'), ...]
 
 
 
-blob.noun_phrases   # WordList(['titular threat', 'blob',
+# blob.noun_phrases   # WordList(['titular threat', 'blob',
 
-                    #            'ultimate movie monster',
+#                     #            'ultimate movie monster',
 
-                    #            'amoeba-like mass', ...])
+#                     #            'amoeba-like mass', ...])
 
 
 
@@ -36,8 +36,4 @@ blob.noun_phrases   # WordList(['titular threat', 'blob',
 
 print(blob.sentiment)
 
-# 0.060
 
-# -0.341
-
-blob.translate(to="es")  # 'La amenaza titular de The Blob...'
