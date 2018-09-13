@@ -25,16 +25,34 @@ class anArticle:
 def get_updated_articles(from_date, to_date):
     #IMPORTANT: Limit to NewsAPI is fetching 20 articles @ a time..
     logger.info('Getting articles from ' + from_date + ' to ' + to_date)
-    all_articles = newsapi.get_everything(q = 'AMD stock',
-                                        from_param = from_date,
-                                        to = to_date,
-                                        language = 'en',
-                                        sort_by = 'relevancy',
-                                        )
-    returned_articles = all_articles.get('articles',None)
-    num_articles = len(returned_articles)
-    logger.info('Total number of articles fetched: ' + str(num_articles))
-    return returned_articles
+    all_articles_returned = []
+    all_articles_num = 0
+    page_empty = False
+    num = 1
+    while not page_empty:
+        logger.info('Going through page' + str(num))
+        all_articles = newsapi.get_everything(q = 'AMD stock',
+                                            from_param = from_date,
+                                            to = to_date,
+                                            language = 'en',
+                                            sort_by = 'relevancy',
+                                            page=num
+                                            )
+        returned_articles = all_articles.get('articles',None)
+        num_articles = len(returned_articles)
+
+        all_articles_returned = all_articles_returned + returned_articles
+        all_articles_num = all_articles_num + num_articles        
+
+        logger.info('Number of articles fetched this batch: ' + str(num_articles))
+        if num_articles == 0:
+            page_empty = True
+            logger.info('No more pages to go through!')
+        else:
+            num += 1
+
+    logger.info ('Total number of articles fetched: ' + str(all_articles_num))
+    return all_articles_returned
 
 def create_articleList(from_date, to_date):
     articles = get_updated_articles(from_date, to_date)
