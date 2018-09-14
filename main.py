@@ -21,6 +21,7 @@ now = datetime.datetime.now()
 from_date = ''
 to_date = ''
 
+sentiment_tool = 'vader'
 
 def date_formatter():
     dates = {'start':'', 'end':''}
@@ -51,22 +52,34 @@ if CREATECSV:
 
     #all useful dates (TODO: add sentiment analysis to the returned result)
     # article_list = [anArticle('sss','d','2018/09/12','0','0'),anArticle('sff','d','2018/09/12','0','0')]
-    useful_data = link_stock_value_to_article_date(article_list)
+    useful_data = link_stock_value_to_article_date(article_list, sentiment_tool)
 
-    exit()
     csv = open('manipulated_data.csv',"w")
 
     columnTitleRow = "date, url, high, low, polarity, subjectivity\n"
+    columnTitleRow_vader = "date, url, high, low, positive, negative, neutral, compound\n"
     csv.write(columnTitleRow)
 
     for data in useful_data:
         for i in data:
-            date = i.date
-            url = i.url
-            high = i.dayhigh
-            low = i.daylow
-            polarity = i.polarity
-            subjectivity = i.subjectivity
-            row = str(date) + "," + str(url) + ',' + str(high) + ',' + str(low) + ',' + str(polarity) + ',' + str(subjectivity) + '\n'
+            if(sentiment_tool == 'textblob'):
+                date = i.date
+                url = i.url
+                high = i.dayhigh
+                low = i.daylow
+                polarity = i.polarity
+                subjectivity = i.subjectivity
+                row = str(date) + "," + str(url) + ',' + str(high) + ',' + str(low) + ',' + str(polarity) + ',' + str(subjectivity) + '\n'
+            if(sentiment_tool == 'vader'):
+                date = i.date
+                url = i.url
+                high = i.dayhigh
+                low = i.daylow
+                positive = i.pos
+                negative = i.neg
+                neutral = i.neu
+                compound = i.compound
+                row = str(date) + "," + str(url) + ',' + str(high) + ',' + str(low) + ',' + str(positive) + ',' + str(negative) + ',' + str(neutral) + ',' + str(compound) + '\n'
+                    
             csv.write(row)
 

@@ -1,1 +1,22 @@
-date, url, high, low, polarity, subjectivity
+date, url, high, low, positive, negative, neutral, compound
+2018/09/11,https://www.marketwatch.com/story/amd-price-hike-not-enough-to-overcome-chip-stock-slip-as-memory-chip-woes-settle-in-2018-09-11,30.5900,29.3700,0.106,0.036,0.858,0.9914
+2018/09/11,https://www.marketwatch.com/story/heed-the-early-warning-signal-in-11-popular-tech-stocks-money-flows-2018-09-11,30.5900,29.3700,0.128,0.069,0.803,0.9918
+2018/09/11,https://www.fool.com/investing/2018/09/11/how-to-invest-in-semiconductors.aspx,30.5900,29.3700,0.149,0.029,0.822,0.9999
+2018/09/11,https://finance.yahoo.com/news/amds-setup-gives-rosenblatt-securities-192856215.html,30.5900,29.3700,0.106,0.005,0.889,0.9873
+2018/09/11,https://finance.yahoo.com/news/time-buy-micron-mu-stock-211709935.html,30.5900,29.3700,0.097,0.052,0.85,0.9793
+2018/09/11,https://www.geek.com/deals-2/geek-deals-nintendo-switch-pikachu-and-eevee-edition-alienware-gaming-pcs-1751993/,30.5900,29.3700,0.097,0.007,0.896,0.9986
+2018/09/11,https://seekingalpha.com/article/4205626-technology-telecom-dashboard-update,30.5900,29.3700,0.099,0.021,0.88,0.9973
+2018/09/11,https://www.hotukdeals.com/deals/amd-ryzen-5-2600-6-core-14248-amazon-temporarily-out-of-stock-3044557,30.5900,29.3700,0.147,0.0,0.853,0.6705
+2018/09/11,https://www.cnbc.com/2018/09/11/your-first-trade-for-tuesday-sept-11.html,30.5900,29.3700,0.008,0.015,0.977,-0.2577
+2018/09/11,https://finance.yahoo.com/news/micron-stock-sale-again-long-160155359.html,30.5900,29.3700,0.128,0.048,0.824,0.993
+2018/09/11,https://www.marketwatch.com/story/amd-target-hiked-to-40-at-rosenblatt-2018-09-11,30.5900,29.3700,0.123,0.0,0.877,0.9524
+2018/09/11,https://wccftech.com/intel-core-i9-9900k-cpu-3dmark-timespy-performance-benchmark-leak/,30.5900,29.3700,0.048,0.007,0.946,0.9875
+2018/09/11,https://www.cnbc.com/2018/09/11/cramer-pinpoints-the-key-to-amds-success-its-massive-end-market.html,30.5900,29.3700,0.082,0.08,0.838,-0.5135
+2018/09/11,https://www.cnbc.com/2018/09/11/amd-can-compete-against-nvidia-in-ai-analyst-says.html,30.5900,29.3700,0.132,0.03,0.838,0.9802
+2018/09/11,https://www.trustedreviews.com/best/best-macbook-3527944,30.5900,29.3700,0.112,0.011,0.877,0.9997
+2018/09/11,https://www.cnbc.com/2018/09/11/cramer-remix-its-unclear-why-the-auto-sector-is-as-weak-as-it-is.html,30.5900,29.3700,0.039,0.153,0.807,-0.988
+2018/09/11,https://seekingalpha.com/article/4205507-micron-taking-long-term-value-investing-view,30.5900,29.3700,0.133,0.032,0.835,0.9998
+2018/09/11,https://www.theinquirer.net/inquirer/news/3062497/intels-9th-gen-cpus-outperform-amds-ryzen-2-in-leaked-benchmarks,30.5900,29.3700,0.131,0.036,0.833,0.9935
+2018/09/11,https://www.marketwatch.com/story/intels-stock-falls-into-first-bear-market-in-over-2-years-2018-09-11,30.5900,29.3700,0.033,0.06,0.907,-0.9426
+2018/09/11,https://seekingalpha.com/article/4205580-tsla-tslaq-betting-zero,30.5900,29.3700,0.103,0.061,0.836,0.9998
+2018/09/11,https://www.marketwatch.com/story/charting-a-bullish-september-backdrop-sp-500-nasdaq-maintain-major-support-2018-09-11-121035128,30.5900,29.3700,0.08,0.027,0.893,0.9986

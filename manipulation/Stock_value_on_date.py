@@ -27,17 +27,19 @@ class Information_vader:
     informationCount = 0
 
 #can also get other values, refer to AMD_data.csv
-    def __init__(self,date,high,low,url,polarity,subjectivity):
+    def __init__(self,date,high,low,url,pos,neg, neu, compound):
         self.date = date
         self.dayhigh = high
         self.daylow = low
         self.url = url
-        self.polarity = polarity
-        self.subjectivity = subjectivity
+        self.pos = pos
+        self.neg = neg
+        self.neu = neu
+        self.compound = compound
         self.informationCount += 1
 
     def __repr__(self):
-        return "< " + str(self.informationCount) +"; date = " + str(self.date) + "; high = " + str(self.dayhigh) + "; low = " + str(self.daylow) + "; url = " + str(self.url) + "; polarity = " + str(self.polarity) + "; subjectivity = " + str(self.subjectivity) +">"           
+        return "< " + str(self.informationCount) +"; date = " + str(self.date) + "; high = " + str(self.dayhigh) + "; low = " + str(self.daylow) + "; url = " + str(self.url) + "; pos = " + str(self.pos) + "; neg = " + str(self.neg) + "; neu = " + str(self.neu) + "; compound = " + str(self.compound) + ">"             
 
 #data returned from newsAPI doesn't match the format from AMD_data.csv, this corrects that
 def dateManipulation( someArticle ):

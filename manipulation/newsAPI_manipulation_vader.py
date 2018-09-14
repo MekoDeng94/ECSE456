@@ -79,7 +79,6 @@ def create_articleList_vader(from_date, to_date):
             article.parse()
             text = article.text
             sentiment = get_vader_sentiment(text)
-            logger.info(sentiment)
             domain_name = anArticle_vader(link, auth, time, sentiment['pos'], sentiment['neg'], sentiment['neu'], sentiment['compound'])
             articleList.append(domain_name)
         except Exception as e:
