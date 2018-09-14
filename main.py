@@ -4,6 +4,7 @@ import datetime
 import csv
 from newsapi import NewsApiClient
 from manipulation.newsAPI_manipulation import get_updated_articles, create_articleList, anArticle
+from manipulation.newsAPI_manipulation_vader import get_updated_articles_vader, create_articleList_vader, anArticle_vader
 from manipulation.Stock_value_on_date import link_stock_value_to_article_date
 from runner.console_monochrome import Console
 
@@ -40,17 +41,19 @@ if CREATECSV:
 
     dates_range = date_formatter()
 
-    from_date = dates_range['start']
-    # from_date = '2018-09-10'
-    to_date = dates_range['end']
+    # from_date = dates_range['start']
+    from_date = '2018-09-11'
+    to_date = '2018-09-11'
+    # to_date = dates_range['end']
 
     #TODO: transfer the returned data (useful_data) to a csv file and continue from the last registered date
-    article_list = create_articleList(from_date, to_date)
+    article_list = create_articleList_vader(from_date, to_date)
 
     #all useful dates (TODO: add sentiment analysis to the returned result)
     # article_list = [anArticle('sss','d','2018/09/12','0','0'),anArticle('sff','d','2018/09/12','0','0')]
     useful_data = link_stock_value_to_article_date(article_list)
 
+    exit()
     csv = open('manipulated_data.csv',"w")
 
     columnTitleRow = "date, url, high, low, polarity, subjectivity\n"

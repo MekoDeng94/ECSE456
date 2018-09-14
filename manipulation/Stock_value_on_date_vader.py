@@ -23,22 +23,6 @@ class Information:
     def __repr__(self):
         return "< " + str(self.informationCount) +"; date = " + str(self.date) + "; high = " + str(self.dayhigh) + "; low = " + str(self.daylow) + "; url = " + str(self.url) + "; polarity = " + str(self.polarity) + "; subjectivity = " + str(self.subjectivity) +">"           
 
-class Information_vader:
-    informationCount = 0
-
-#can also get other values, refer to AMD_data.csv
-    def __init__(self,date,high,low,url,polarity,subjectivity):
-        self.date = date
-        self.dayhigh = high
-        self.daylow = low
-        self.url = url
-        self.polarity = polarity
-        self.subjectivity = subjectivity
-        self.informationCount += 1
-
-    def __repr__(self):
-        return "< " + str(self.informationCount) +"; date = " + str(self.date) + "; high = " + str(self.dayhigh) + "; low = " + str(self.daylow) + "; url = " + str(self.url) + "; polarity = " + str(self.polarity) + "; subjectivity = " + str(self.subjectivity) +">"           
-
 #data returned from newsAPI doesn't match the format from AMD_data.csv, this corrects that
 def dateManipulation( someArticle ):
     dateOfArticle = someArticle.date
@@ -60,22 +44,9 @@ def newsAPIandCSVcompare (csv, newsAPIdates_article):
             registeredInfo = Information(csv[0],csv[4],csv[5],article.url, article.polarity, article.subjectivity)
             datesAndValues.append(registeredInfo)
 
-    return datesAndValues
-
-#fetching the right AMD_data value for the newsAPI target date
-def newsAPIandCSVcompare_vader(csv, newsAPIdates_article):
-    datesAndValues = []
-
-    for article in newsAPIdates_article:
-        logger.info('comparing: ' + csv[0] + ' to ' + article.date)
-        if csv[0] == article.date:
-            logger.info('matching dates: ' + str(article.date))
-            registeredInfo = Information_vader(csv[0],csv[4],csv[5],article.url, article.pos, article.neg, article.neu, article.compound)
-            datesAndValues.append(registeredInfo)
-
     return datesAndValues    
 
-def link_stock_value_to_article_date(article_list, sentiment_tool):
+def link_stock_value_to_article_date(article_list):
     complete_data = []
     newsAPIdates_article = []
 
@@ -91,10 +62,7 @@ def link_stock_value_to_article_date(article_list, sentiment_tool):
         reader=csv.reader(f)
         for row in reader:
             if row:
-                if (sentiment_tool == 'textblob'):
-                    compared_result = newsAPIandCSVcompare(row, newsAPIdates_article)
-                if (sentiment_tool =='vader'):
-                    compared_result = newsAPIandCSVcompare_vader(row, newsAPIdates_article)
+                compared_result = newsAPIandCSVcompare(row, newsAPIdates_article)
                 logger.info(compared_result)
                 if compared_result != []:
                     complete_data.append(compared_result)
