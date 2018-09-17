@@ -41,40 +41,44 @@ def date_formatter():
     return dates
 
 if CREATECSV:
-
     dates_range = date_formatter()
 
-    # from_date = '2018-08-18'
-    # to_date = '2018-09-17'
+    from_date = '2018-09-14'
+    to_date = '2018-09-14'
 
-    from_date = dates_range['start']
-    to_date = dates_range['end']
+    # from_date = dates_range['start']
+    # to_date = dates_range['end']
 
     #TODO: transfer the returned data (useful_data) to a csv file and continue from the last registered date
-    if (sentiment_tool == 'vader'):
-        article_list = create_articleList_vader(from_date, to_date)
-    if (sentiment_tool == 'textblob'):
-        article_list = create_articleList(from_date,to_date)
-        
+    article_list = create_articleList(from_date,to_date, sentiment_tool)
     useful_data = link_stock_value_to_article_date(article_list, sentiment_tool)
 
-    csv = open('manipulated_data.csv',"w")
+    if (sentiment_tool == 'textblob'):
+        csv = open('manipulated_data_textblob.csv',"w")
+        columnTitleRow = "date, url, open_value, high, low, polarity, subjectivity\n"
+        csv.write(columnTitleRow)
 
-    columnTitleRow = "date, url, high, low, polarity, subjectivity\n"
-    columnTitleRow_vader = "date, url, high, low, positive, negative, neutral, compound\n"
-    csv.write(columnTitleRow)
-
-    for data in useful_data:
-        for i in data:
-            if(sentiment_tool == 'textblob'):
+        for data in useful_data:
+            for i in data:
+                open_value = i.open
                 date = i.date
                 url = i.url
                 high = i.dayhigh
                 low = i.daylow
                 polarity = i.polarity
-                subjectivity = i.subjectivity
-                row = str(date) + "," + str(url) + ',' + str(high) + ',' + str(low) + ',' + str(polarity) + ',' + str(subjectivity) + '\n'
-            if(sentiment_tool == 'vader'):
+                subjectivity = i.subjectivity   
+                row = str(date) + "," + str(url) + ',' + str(open_value) + ',' + str(high) + ',' + str(low) + ',' + str(polarity) + ',' + str(subjectivity) + '\n'
+                        
+                csv.write(row)
+
+    if (sentiment_tool =='vader'):
+        csv = open('manipulated_data_vader.csv',"w")
+        columnTitleRow_vader = "date, url, open_value, high, low, positive, negative, neutral, compound\n"
+        csv.write(columnTitleRow)
+
+        for data in useful_data:
+            for i in data:
+                open_value = i.open_value
                 date = i.date
                 url = i.url
                 high = i.dayhigh
@@ -83,7 +87,7 @@ if CREATECSV:
                 negative = i.neg
                 neutral = i.neu
                 compound = i.compound
-                row = str(date) + "," + str(url) + ',' + str(high) + ',' + str(low) + ',' + str(positive) + ',' + str(negative) + ',' + str(neutral) + ',' + str(compound) + '\n'
-                    
-            csv.write(row)
+                row = str(date) + "," + str(url) + ',' + str(open_value) + ',' + str(high) + ',' + str(low) + ',' + str(positive) + ',' + str(negative) + ',' + str(neutral) + ',' + str(compound) + '\n'
+                        
+                csv.write(row)
 

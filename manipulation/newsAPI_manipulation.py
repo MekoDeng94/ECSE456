@@ -3,6 +3,7 @@ from newsapi import NewsApiClient
 from newspaper import Article
 from runner.console_monochrome import Console
 from textblob import TextBlob
+from manipulation.vader_sentiment import get_vader_sentiment
 from manipulation.text_blob import get_sentiment_polarity, get_sentiment_subjectivity
 
 logger = Console()
@@ -24,7 +25,22 @@ class anArticle:
         self.subjectivity = subjectivity
 
     def __repr__(self):
-        return "<__main__.anArticle: url = " + str(self.url) + "; author = " + str(self.author) + "; date = " + str(self.date) + "; polarity = " + str(self.polarity) + "; subjectivity = " + str(self.subjectivity) + ">"           
+        return "<__main__.anArticle: url = " + str(self.url) + "; author = " + str(self.author) + "; date = " + str(self.date) + "; polarity = " + str(self.polarity) + "; subjectivity = " + str(self.subjectivity) + ">"
+
+class anArticle_vader:
+    articleCount = 0
+
+    def __init__(self,url,author,date, pos, neg, neu, compound):
+        self.url = url
+        self.author = author
+        self.date = date
+        self.pos = pos
+        self.neg = neg
+        self.neu = neu
+        self.compound = compound
+
+    def __repr__(self):
+        return "<__main__.anArticle: url = " + str(self.url) + "; author = " + str(self.author) + "; date = " + str(self.date) + "; pos = " + str(self.pos) + "; neg = " + str(self.neg) + "; neu = " + str(self.neu) + "; compound = " + str(self.compound) + ">"           
 
 def get_updated_articles(from_date, to_date):
     #IMPORTANT: Limit to NewsAPI is fetching 20 articles @ a time..
@@ -58,7 +74,7 @@ def get_updated_articles(from_date, to_date):
     logger.info ('Total number of articles fetched: ' + str(all_articles_num))
     return all_articles_returned
         
-def create_articleList(from_date, to_date):
+def create_articleList(from_date, to_date, sentiment_tool):
     articles = get_updated_articles(from_date, to_date)
     articleList = []
 
@@ -76,9 +92,15 @@ def create_articleList(from_date, to_date):
             article.download()
             article.parse()
             text = article.text
-            sentiment_polarity = get_sentiment_polarity(text)
-            sentiment_subjectivity = get_sentiment_subjectivity(text)
-            domain_name = anArticle(link, auth, time, sentiment_polarity, sentiment_subjectivity)
+            
+            if (sentiment_tool == 'textblob'):
+                sentiment_polarity = get_sentiment_polarity(text)
+                sentiment_subjectivity = get_sentiment_subjectivity(text)
+                domain_name = anArticle(link, auth, time, sentiment_polarity, sentiment_subjectivity)
+
+            if (sentiment_tool == 'vader'):
+                sentiment = get_vader_sentiment(text)
+                domain_name = anArticle_vader(link, auth, time, sentiment['pos'], sentiment['neg'], sentiment['neu'], sentiment['compound'])
             articleList.append(domain_name)
         except Exception as e:
             pass
