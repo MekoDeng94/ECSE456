@@ -43,8 +43,8 @@ if CREATECSV:
     dates_range = date_formatter()
 
     # from_date = dates_range['start']
-    from_date = '2018-09-11'
-    to_date = '2018-09-11'
+    from_date = '2018-08-18'
+    to_date = '2018-09-17'
     # to_date = dates_range['end']
 
     #TODO: transfer the returned data (useful_data) to a csv file and continue from the last registered date
