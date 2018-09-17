@@ -10,9 +10,11 @@ from runner.console_monochrome import Console
 
 parser = argparse.ArgumentParser(description='So far, collecting data for stock market prediction')
 parser.add_argument('--create-csv', dest='createCSV', help='scraping articles from most recent date and applying stock market values on that day', action='store_true')
+parser.add_argument('--sentiment-tool', dest='sentimentTool', help='specify the sentiment analysis tool: "vader" or "textblob"', action='store')
 args = parser.parse_args()
 
 CREATECSV = args.createCSV
+sentiment_tool = args.sentimentTool
 
 logger = Console()
 now = datetime.datetime.now()
@@ -21,7 +23,7 @@ now = datetime.datetime.now()
 from_date = ''
 to_date = ''
 
-sentiment_tool = 'vader'
+# sentiment_tool = 'vader'
 
 def date_formatter():
     dates = {'start':'', 'end':''}
@@ -42,16 +44,18 @@ if CREATECSV:
 
     dates_range = date_formatter()
 
-    # from_date = dates_range['start']
-    from_date = '2018-08-18'
-    to_date = '2018-09-17'
-    # to_date = dates_range['end']
+    # from_date = '2018-08-18'
+    # to_date = '2018-09-17'
+
+    from_date = dates_range['start']
+    to_date = dates_range['end']
 
     #TODO: transfer the returned data (useful_data) to a csv file and continue from the last registered date
-    article_list = create_articleList_vader(from_date, to_date)
-
-    #all useful dates (TODO: add sentiment analysis to the returned result)
-    # article_list = [anArticle('sss','d','2018/09/12','0','0'),anArticle('sff','d','2018/09/12','0','0')]
+    if (sentiment_tool == 'vader'):
+        article_list = create_articleList_vader(from_date, to_date)
+    if (sentiment_tool == 'textblob'):
+        article_list = create_articleList(from_date,to_date)
+        
     useful_data = link_stock_value_to_article_date(article_list, sentiment_tool)
 
     csv = open('manipulated_data.csv',"w")
