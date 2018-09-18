@@ -55,8 +55,8 @@ if CREATECSV:
 
     if (sentiment_tool == 'textblob'):
         csv = open('manipulated_data_textblob.csv',"w")
-        columnTitleRow = "date, url, open_value, high, low, polarity, subjectivity\n"
-        csv.write(columnTitleRow)
+        columnTitleRow_textblob = "date, url, open_value, high, low, polarity, subjectivity\n"
+        csv.write(columnTitleRow_textblob)
 
         for data in useful_data:
             for i in data:
@@ -74,11 +74,11 @@ if CREATECSV:
     if (sentiment_tool =='vader'):
         csv = open('manipulated_data_vader.csv',"w")
         columnTitleRow_vader = "date, url, open_value, high, low, positive, negative, neutral, compound\n"
-        csv.write(columnTitleRow)
+        csv.write(columnTitleRow_vader)
 
         for data in useful_data:
             for i in data:
-                open_value = i.open_value
+                open_value = i.open
                 date = i.date
                 url = i.url
                 high = i.dayhigh
