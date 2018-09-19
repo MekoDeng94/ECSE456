@@ -11,14 +11,37 @@ class Information:
     informationCount = 0
 
 #can also get other values, refer to AMD_data.csv
-    def __init__(self,date,high,low):
+    def __init__(self,date,open_value,high,low,url,polarity,subjectivity):
         self.date = date
+        self.open = open_value
         self.dayhigh = high
         self.daylow = low
+        self.url = url
+        self.polarity = polarity
+        self.subjectivity = subjectivity
         self.informationCount += 1
 
     def __repr__(self):
-        return "< " + str(self.informationCount) +"; date = " + str(self.date) + "; high = " + str(self.dayhigh) + "; low = " + str(self.daylow) + ">"           
+        return "< " + str(self.informationCount) +"; date = " + str(self.date) +"; open = " + str(self.open)+ "; high = " + str(self.dayhigh) + "; low = " + str(self.daylow) + "; url = " + str(self.url) + "; polarity = " + str(self.polarity) + "; subjectivity = " + str(self.subjectivity) +">"           
+
+class Information_vader:
+    informationCount = 0
+
+#can also get other values, refer to AMD_data.csv
+    def __init__(self,date,open_value,high,low,url,pos,neg, neu, compound):
+        self.date = date
+        self.open = open_value
+        self.dayhigh = high
+        self.daylow = low
+        self.url = url
+        self.pos = pos
+        self.neg = neg
+        self.neu = neu
+        self.compound = compound
+        self.informationCount += 1
+
+    def __repr__(self):
+        return "< " + str(self.informationCount) +"; date = " + str(self.date) +"; open = " + str(self.open) + "; high = " + str(self.dayhigh) + "; low = " + str(self.daylow) + "; url = " + str(self.url) + "; pos = " + str(self.pos) + "; neg = " + str(self.neg) + "; neu = " + str(self.neu) + "; compound = " + str(self.compound) + ">"             
 
 #data returned from newsAPI doesn't match the format from AMD_data.csv, this corrects that
 def dateManipulation( someArticle ):
@@ -26,39 +49,57 @@ def dateManipulation( someArticle ):
     pureDate = dateOfArticle.split('T', 1)[0]
     matchingDate = pureDate.replace ("-","/")
 
-    return matchingDate
+    someArticle.date = matchingDate
+
+    return someArticle
 
 #fetching the right AMD_data value for the newsAPI target date
-def newsAPIandCSVcompare (csv, newsAPIdates):
+def newsAPIandCSVcompare (csv, newsAPIdates_article):
     datesAndValues = []
 
-    for newsAPIdate in newsAPIdates:
-        logger.info('comparing: ' + csv[0] + ' to ' + newsAPIdate)
-        if csv[0] == newsAPIdate:
-            logger.info('matching dates: ' + str(newsAPIdate))
-            registeredInfo = Information(csv[0],csv[4],csv[5])
-            #TODO: format correctly
-            return registeredInfo
+    for article in newsAPIdates_article:
+        logger.info('comparing: ' + csv[0] + ' to ' + article.date)
+        if csv[0] == article.date:
+            logger.info('matching dates: ' + str(article.date))
+            registeredInfo = Information(csv[0],csv[3],csv[4],csv[5],article.url, article.polarity, article.subjectivity)
+            datesAndValues.append(registeredInfo)
+
+    return datesAndValues
+
+#fetching the right AMD_data value for the newsAPI target date
+def newsAPIandCSVcompare_vader(csv, newsAPIdates_article):
+    datesAndValues = []
+
+    for article in newsAPIdates_article:
+        logger.info('comparing: ' + csv[0] + ' to ' + article.date)
+        if csv[0] == article.date:
+            logger.info('matching dates: ' + str(article.date))
+            registeredInfo = Information_vader(csv[0],csv[3],csv[4],csv[5],article.url, article.pos, article.neg, article.neu, article.compound)
+            datesAndValues.append(registeredInfo)
 
     return datesAndValues    
 
-def link_stock_value_to_article_date(article_list):
+def link_stock_value_to_article_date(article_list, sentiment_tool):
     complete_data = []
-    newsAPIdates = []
+    newsAPIdates_article = []
 
     logger.info('manipulating article dates ...')
     for singleArticle in article_list:
-        matchingDate = dateManipulation(singleArticle) 
-        newsAPIdates.append(matchingDate) 
+        matchingDate_Article = dateManipulation(singleArticle) 
+        newsAPIdates_article.append(matchingDate_Article) 
 
     #reading AMD_data file
     with open(r'AMD_data.csv')as f:
         logger.info('reading AMD_data.csv ...')
+        f.readline()
         reader=csv.reader(f)
         for row in reader:
             if row:
-                compared_result = newsAPIandCSVcompare(row, newsAPIdates)
-                #TODO: a little too recursive here
+                if (sentiment_tool == 'textblob'):
+                    compared_result = newsAPIandCSVcompare(row, newsAPIdates_article)
+                if (sentiment_tool =='vader'):
+                    compared_result = newsAPIandCSVcompare_vader(row, newsAPIdates_article)
+                logger.info(compared_result)
                 if compared_result != []:
                     complete_data.append(compared_result)
     
