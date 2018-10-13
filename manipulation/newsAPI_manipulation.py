@@ -5,6 +5,7 @@ from runner.console_monochrome import Console
 from textblob import TextBlob
 from manipulation.vader_sentiment import get_vader_sentiment
 from manipulation.text_blob import get_sentiment_polarity, get_sentiment_subjectivity
+import googleScapper
 
 logger = Console()
 
@@ -40,7 +41,7 @@ class anArticle_vader:
         self.compound = compound
 
     def __repr__(self):
-        return "<__main__.anArticle: url = " + str(self.url) + "; author = " + str(self.author) + "; date = " + str(self.date) + "; pos = " + str(self.pos) + "; neg = " + str(self.neg) + "; neu = " + str(self.neu) + "; compound = " + str(self.compound) + ">"           
+        return "<__main__.anArticle: url = " + str(self.url) + "; author = " + str(self.author) + "; date = " + str(self.date) + "; pos = " + str(self.pos) + "; neg = " + str(self.neg) + "; neu = " + str(self.neu) + "; compound = " + str(self.compound) + ">"
 
 def get_updated_articles(from_date, to_date):
     #IMPORTANT: Limit to NewsAPI is fetching 20 articles @ a time..
@@ -49,20 +50,22 @@ def get_updated_articles(from_date, to_date):
     all_articles_num = 0
     page_empty = False
     num = 1
-    while not page_empty:
-        logger.info('Going through page' + str(num))
-        all_articles = newsapi.get_everything(q = 'AMD stock',
-                                            from_param = from_date,
+    while (not page_empty) and num <= 1:
+        all_articles = googleScapper.get_everything(q ='AMD stock',
+                                            from_param =from_date,
                                             to = to_date,
                                             language = 'en',
                                             sort_by = 'relevancy',
-                                            page=num
+                                            page=num,
+                                            page_size=30
                                             )
+
         returned_articles = all_articles.get('articles',None)
+
         num_articles = len(returned_articles)
 
         all_articles_returned = all_articles_returned + returned_articles
-        all_articles_num = all_articles_num + num_articles        
+        all_articles_num = all_articles_num + num_articles
 
         logger.info('Number of articles fetched this batch: ' + str(num_articles))
         if num_articles == 0:
@@ -73,7 +76,7 @@ def get_updated_articles(from_date, to_date):
 
     logger.info ('Total number of articles fetched: ' + str(all_articles_num))
     return all_articles_returned
-        
+
 def create_articleList(from_date, to_date, sentiment_tool):
     articles = get_updated_articles(from_date, to_date)
     articleList = []
@@ -84,15 +87,13 @@ def create_articleList(from_date, to_date, sentiment_tool):
         link = article.get("url")
         auth = article.get("author")
         time = article.get("publishedAt")
-        sources = article.get("source")
-        domain_name = sources.get("name")
         logger.info('Extracting article information... ' + str(count))
         article = Article(link)
         try:
             article.download()
             article.parse()
             text = article.text
-            
+
             if (sentiment_tool == 'textblob'):
                 sentiment_polarity = get_sentiment_polarity(text)
                 sentiment_subjectivity = get_sentiment_subjectivity(text)
@@ -109,4 +110,4 @@ def create_articleList(from_date, to_date, sentiment_tool):
 
     return articleList
 
-    
+
