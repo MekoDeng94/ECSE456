@@ -5,7 +5,7 @@ from runner.console_monochrome import Console
 from textblob import TextBlob
 from manipulation.vader_sentiment import get_vader_sentiment
 from manipulation.text_blob import get_sentiment_polarity, get_sentiment_subjectivity
-import googleScapper
+import manipulation.googleScapper as googleScapper
 
 logger = Console()
 
@@ -51,7 +51,7 @@ def get_updated_articles(from_date, to_date):
     page_empty = False
     num = 1
     while (not page_empty) and num <= 1:
-        all_articles = googleScapper.get_everything(q ='AMD stock',
+        all_articles = googleScapper.get_everything(q ='AMD|Advanced Micro Devices',
                                             from_param =from_date,
                                             to = to_date,
                                             language = 'en',

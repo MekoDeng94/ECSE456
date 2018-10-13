@@ -4,7 +4,7 @@ import datetime
 import csv
 from newsapi import NewsApiClient
 from manipulation.newsAPI_manipulation import get_updated_articles, create_articleList, anArticle
-from manipulation.newsAPI_manipulation_vader import get_updated_articles_vader, create_articleList_vader, anArticle_vader
+#from manipulation.newsAPI_manipulation_vader import get_updated_articles_vader, create_articleList_vader, anArticle_vader
 from manipulation.Stock_value_on_date import link_stock_value_to_article_date
 from runner.console_monochrome import Console
 
