@@ -1,22 +1,6 @@
-date, url, open_value, high, low, positive, negative, neutral, compound
-2018/09/14,https://www.marketwatch.com/story/amd-stock-gains-after-argus-hikes-target-to-40-2018-09-14,31.4300,33.0900,30.5400,0.117,0.02,0.863,0.9432
-2018/09/14,https://www.onmsft.com/news/amd-and-microsoft-are-working-on-the-next-xbox-console-together,31.4300,33.0900,30.5400,0.029,0.012,0.959,0.5789
-2018/09/14,https://www.forbes.com/sites/greatspeculations/2018/09/14/keys-to-amds-continued-growth/,31.4300,33.0900,30.5400,0.135,0.004,0.862,0.9969
-2018/09/14,https://globenewswire.com/news-release/2018/09/14/1570996/0/en/Opthea-Presents-Phase-1-2a-Data-of-OPT-302-in-wet-AMD-at-the-Retina-Society-2018-Annual-Meeting.html,31.4300,33.0900,30.5400,0.101,0.045,0.855,0.9977
-2018/09/14,https://www.investopedia.com/news/amds-stock-seen-plunging-over-20-short-term/,31.4300,33.0900,30.5400,0.119,0.046,0.835,0.9892
-2018/09/14,https://www.pcgamer.com/build-it-a-high-end-amd-ryzen-2-rig/,31.4300,33.0900,30.5400,0.134,0.054,0.812,0.9993
-2018/09/14,http://www.tomshardware.com/answers/id-3784818/amd-radeon-8750m-gpu-performance.html,31.4300,33.0900,30.5400,0.017,0.0,0.983,0.0772
-2018/09/14,https://www.investors.com/market-trend/stock-market-today/stock-futures-tech-stocks-chip-stocks/,31.4300,33.0900,30.5400,0.097,0.046,0.856,0.995
-2018/09/14,http://www.tomshardware.com/answers/id-3784668/amd-driver-update-recommends-optional-update.html,31.4300,33.0900,30.5400,0.141,0.117,0.742,0.2415
-2018/09/14,https://www.pcgamer.com/save-dollar70-on-this-amd-ryzen-5-2600-cpu-and-msi-x470-motherboard-bundle/,31.4300,33.0900,30.5400,0.028,0.014,0.958,0.1406
-2018/09/14,https://www.nasdaq.com/article/technology-sector-update-for-09142018-nvdadocuamdlplaapl-cm1023223,31.4300,33.0900,30.5400,0.107,0.0,0.893,0.9774
-2018/09/14,https://www.tasnimnews.com/en/news/2018/09/14/1828192/amd-working-on-next-gen-consoles-with-cooperation-of-sony-microsoft,31.4300,33.0900,30.5400,0.123,0.023,0.854,0.9965
-2018/09/14,http://www.tomshardware.com/answers/id-3784914/activate-amd-turbo.html,31.4300,33.0900,30.5400,0.093,0.086,0.821,0.6921
-2018/09/14,https://www.fool.com/investing/2018/09/14/why-l-brands-owens-illinois-and-advanced-micro-dev.aspx,31.4300,33.0900,30.5400,0.154,0.039,0.807,0.9963
-2018/09/14,https://news.am/eng/news/471082.html,31.4300,33.0900,30.5400,0.092,0.052,0.856,0.9775
-2018/09/14,https://gnd-tech.com/2018/09/amd-to-provide-early-support-for-pcie-4-0/,31.4300,33.0900,30.5400,0.105,0.0,0.895,0.9892
-2018/09/14,https://www.notebookcheck.net/Intel-Core-i9-9900K-s-leaked-Cinebench-score-shows-strong-multi-core-performance-at-5-GHz.331616.0.html,31.4300,33.0900,30.5400,0.105,0.048,0.847,0.9691
-2018/09/14,https://www.extremetech.com/computing/276976-intel-marvell-qualcomm-pledge-support-for-glow-ai-compiler,31.4300,33.0900,30.5400,0.114,0.019,0.868,0.9924
-2018/09/14,https://www.investors.com/news/technology/nvidia-artificial-intelligence-wintel/,31.4300,33.0900,30.5400,0.054,0.012,0.935,0.91
-2018/09/14,https://www.marketwatch.com/story/stocks-could-get-much-more-highly-priced-on-the-trump-story-says-robert-shiller-2018-09-14,31.4300,33.0900,30.5400,0.096,0.065,0.838,0.9872
-2018/09/14,https://www.investors.com/market-trend/stock-market-today/nasdaq-tariff-plan-china-growth-stock-breaks-out/,31.4300,33.0900,30.5400,0.122,0.027,0.851,0.9953
+date, open_value, close_value, volume, high, low, compound
+2018/08/20,19.7900,19.9800,62883850.0000,20.0800,19.3500,0.01795000000000002
+2018/08/17,19.1200,19.7700,60507310.0000,19.8200,18.7300,0.2726228205128205
+2018/08/16,19.8600,19.3300,69361230.0000,20.0700,19.2500,0.096725
+2018/08/15,19.8600,19.7000,86157320.0000,20.1000,19.2000,-0.1591
+2018/08/14,19.9700,20.0200,88892330.0000,20.2800,19.6300,0.18542777777777777

@@ -23,7 +23,7 @@ def get_everything(q=None, from_param=None, to=None, language='en',
         logger.info('Going through page' + str(page) + ' of ' + date1.strftime('%m/%d/%Y') + '. Adding '
                     + str(new_articles) + " articles. Total articles: " + str(total_article))
         results['articles'].extend(day_result['articles'])
-        time.sleep(60)
+        time.sleep(5)
         date1 = date1 + day
 
     return results

@@ -57,7 +57,7 @@ def get_updated_articles(from_date, to_date):
                                             language = 'en',
                                             sort_by = 'relevancy',
                                             page=num,
-                                            page_size=30
+                                            page_size=2
                                             )
 
         returned_articles = all_articles.get('articles',None)
@@ -101,7 +101,7 @@ def create_articleList(from_date, to_date, sentiment_tool):
 
             if (sentiment_tool == 'vader'):
                 sentiment = get_vader_sentiment(text)
-                domain_name = anArticle_vader(link, auth, time, sentiment['pos'], sentiment['neg'], sentiment['neu'], sentiment['compound'])
+                domain_name = anArticle_vader(link, auth, time, 0, 0, 0, sentiment)
             articleList.append(domain_name)
         except Exception as e:
             pass
@@ -110,4 +110,35 @@ def create_articleList(from_date, to_date, sentiment_tool):
 
     return articleList
 
+def clean_articleList(articleList):
+    clean_articleList = []
+    currentDate = ""
 
+    article_count_in_day = 0
+    added_compound_value = 0
+
+    for article in articleList:
+        # first time
+        if (currentDate == ""):
+            currentDate = article.date
+            article_count_in_day += 1
+            added_compound_value = article.compound
+        else:
+            if (article.date == currentDate):
+                article_count_in_day += 1
+                added_compound_value += article.compound
+            else:
+                #compute the average
+                average_compound = added_compound_value/article_count_in_day
+                domain_name = anArticle_vader("NONE", "NONE", currentDate, 0,0,0, average_compound)
+                clean_articleList.append(domain_name)
+                article_count_in_day = 1
+                added_compound_value = article.compound
+                currentDate = article.date
+
+    if (currentDate != ""):
+        average_compound = added_compound_value/article_count_in_day
+        domain_name = anArticle_vader("NONE", "NONE", currentDate, 0,0,0, average_compound)
+        clean_articleList.append(domain_name)            
+                
+    return clean_articleList
